@@ -35,6 +35,9 @@ dependencies:
   '@trpc/server':
     specifier: next
     version: 11.0.0-rc.332
+  child_process:
+    specifier: ^1.0.2
+    version: 1.0.2
   class-variance-authority:
     specifier: ^0.7.0
     version: 0.7.0
@@ -74,7 +77,7 @@ devDependencies:
     specifier: ^8.56.2
     version: 8.56.7
   '@types/node':
-    specifier: ^20.11.20
+    specifier: ^20.12.5
     version: 20.12.5
   '@types/react':
     specifier: ^18.2.57
@@ -1175,6 +1178,10 @@ packages:
       ansi-styles: 4.3.0
       supports-color: 7.2.0
     dev: true
+
+  /child_process@1.0.2:
+    resolution: {integrity: sha512-Wmza/JzL0SiWz7kl6MhIKT5ceIlnFPJX+lwUGj7Clhy5MMldsSoJR0+uvRzOS5Kv45Mq7t1PoE8TsOA9bzvb6g==}
+    dev: false
 
   /chokidar@3.6.0:
     resolution: {integrity: sha512-7VT13fmjotKpGipCW9JEQAusEPE+Ei8nl6/g4FBAmIm0GOOLMua9NDDo/DWp0ZAxCr3cPq5ZpBqmPAQgDda2Pw==}
