@@ -1,8 +1,8 @@
 
 import type { NextApiRequest, NextApiResponse } from 'next'
-var exec = require('child_process').exec;
+import { exec } from 'child_process'
  
-const command = `
+const command = (emailId: string) => `
 curl --request POST \
   --url https://api.brevo.com/v3/smtp/email \
   --header 'accept: application/json' \
@@ -10,8 +10,8 @@ curl --request POST \
   --header 'content-type: application/json' \
   --data '{
    "sender":{
-      "name":"Sender Alex",
-      "email":"himanshuchhatpar@gmail.com"
+      "name":"Himanshu Chhatpar (Moonshot)",
+      "email":"${emailId}"
    },
    "to":[
       {
@@ -33,16 +33,22 @@ export default function handler(
   req: NextApiRequest,
   res: NextApiResponse<ResponseData>
 ) {
-  const child = exec(command, function(error: any, stdout: string, stderr:string){
+  if(req.method !== "POST") {
+    res.status(404).json({ message: 'Endpoint not found' })
+    return
+  }
 
-    console.log('stdout: ' + stdout);
-    console.log('stderr: ' + stderr);
-    
+  const emailId = (req?.body as {emailId: string})?.emailId;
+  if(!emailId || typeof emailId !== "string") { 
+    res.status(404).json({ message: 'Incorrect Body' });
+    return
+  }
+
+  exec(command(emailId), function(error: unknown){
     if(error !== null)
     {
-        console.log('exec error: ' + error);
+      res.status(200).json({ message: 'Email Sent Successfully' })
     }
-    
     });
-  res.status(200).json({ message: 'Hello from Next.js!' })
+ 
 }
