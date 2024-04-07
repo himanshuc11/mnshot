@@ -40,7 +40,7 @@ export default function handler(
     return
   }
 
-  const requestBody = JSON.parse(req?.body) as Props;
+  const requestBody = JSON.parse(req?.body as string) as Props;
   const emailId = requestBody.emailId;
 
   if(!emailId || typeof emailId !== "string") { 

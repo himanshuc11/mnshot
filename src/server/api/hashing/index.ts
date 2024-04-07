@@ -2,8 +2,6 @@ import bcrypt from "bcrypt"
 
 class PasswordManager {
     SALT_ROUNDS = 10;
-    constructor() {
-    }
 
     hashPassword(plainTextPassword: string) {
         const hashedPassword = bcrypt.hashSync(plainTextPassword, this.SALT_ROUNDS);
