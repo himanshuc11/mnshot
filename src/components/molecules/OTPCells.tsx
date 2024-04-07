@@ -12,13 +12,13 @@ type Props = {
 }
 
 export function InputOTPPattern(props: Props) {
-  const cellCount = props.numberOfCells || 7;
+  const cellCount = props.numberOfCells ?? 7;
   const cells = [...Array(cellCount).keys()];
 
   return (
     <InputOTP maxLength={8} pattern={REGEXP_ONLY_DIGITS_AND_CHARS}>
       {cells.map((currentCell) => (
-        <InputOTPGroup>
+        <InputOTPGroup key={currentCell}>
           <InputOTPSlot index={currentCell} />
         </InputOTPGroup>
       )
