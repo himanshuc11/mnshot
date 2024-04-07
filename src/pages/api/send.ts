@@ -1,8 +1,10 @@
 
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { exec } from 'child_process'
+
+type Props = { emailId: string, otp: string, userName: string }
  
-const command = (emailId: string) => `
+const command = (props: Props) => `
 curl --request POST \
   --url https://api.brevo.com/v3/smtp/email \
   --header 'accept: application/json' \
@@ -11,16 +13,16 @@ curl --request POST \
   --data '{
    "sender":{
       "name":"Himanshu Chhatpar (Moonshot)",
-      "email":"${emailId}"
+      "email":"himanshuchhatpar@gmail.com"
    },
    "to":[
       {
-         "email":"himanshuchhatpar@gmail.com",
-         "name":"John Doe"
+         "email":"${props.emailId}",
+         "name":"${props.userName}"
       }
    ],
-   "subject":"Hello world",
-   "htmlContent":"<html><head></head><body><p>Hello,</p>EMAIL CHECK.</p></body></html>"
+   "subject":"E-Commerce OTP",
+   "htmlContent":"<html><head></head><body><p>Hello ${props.userName},</p>Please user ${props.otp} to validate your email id.</p></body></html>"
 }'
 `
 
@@ -38,17 +40,18 @@ export default function handler(
     return
   }
 
-  const emailId = (req?.body as {emailId: string})?.emailId;
+  const requestBody = JSON.parse(req?.body as string) as Props;
+  const emailId = requestBody.emailId;
+
   if(!emailId || typeof emailId !== "string") { 
     res.status(404).json({ message: 'Incorrect Body' });
-    return
+    return;
   }
 
-  exec(command(emailId), function(error: unknown){
+  exec(command(requestBody), function(error: unknown){
     if(error !== null)
     {
       res.status(200).json({ message: 'Email Sent Successfully' })
     }
     });
- 
 }
