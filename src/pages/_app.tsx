@@ -5,6 +5,7 @@ import { api } from "@/utils/api";
 
 import "@/styles/globals.css";
 import { Button } from "@/components/atoms/Button";
+import { Checkbox } from "@/components/atoms/Checkbox";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -15,6 +16,7 @@ const MyApp: AppType = ({ Component, pageProps }) => {
   return (
     <main className={`font-sans ${inter.variable}`}>
       <Button variant="default">Button</Button>
+      <Checkbox id="terms1" />
     </main>
   );
 };
