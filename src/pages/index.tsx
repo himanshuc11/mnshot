@@ -1,6 +1,12 @@
 "use client"
+import { Inter } from 'next/font/google'
 import { Button } from "@/components/atoms/Button";
 import { api } from "@/utils/api";
+import Header from "@/components/organism/Header";
+import { cn } from 'lib/utils';
+
+const inter = Inter({ subsets: ['latin'] })
+ 
 
 export default function Home() {
   const { mutateAsync: createUser } =  api.post.createUser.useMutation()
@@ -15,9 +21,10 @@ export default function Home() {
   }
 
   return (
-    <>
-      <Button>Send Email</Button>
-      <Button onClick={triggerInsertUser}>Create User</Button>
-    </>
+    <main className={cn(`w-full h-full bg-red-300`, inter.className)}>
+      <Header />
+      {/* <Button>Send Email</Button>
+      <Button onClick={triggerInsertUser}>Create User</Button> */}
+    </main>
   );
 }

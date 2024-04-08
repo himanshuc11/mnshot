@@ -13,6 +13,8 @@ export default {
     },
     extend: {
       colors: {
+        offWhite: "#F4F4F4",
+        textBlack: "#333333",
         grey: "#C1C1C1",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
